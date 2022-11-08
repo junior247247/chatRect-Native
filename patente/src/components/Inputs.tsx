@@ -7,7 +7,7 @@ interface Props{
     security?:boolean;
     inputType: 'email-address'|'default' |'numeric'| 'email-address'| 'ascii-capable'| 'numbers-and-punctuation'| 'number-pad'| 'phone-pad'| 'name-phone-pad'| 'decimal-pad'| 'twitter'| 'web-search' |'visible-password';
     icon:'lock-closed-outline'| 'mail-outline' |'person-circle-outline'|'';
-    placeholder:'contraseña'|'correo@test.com'|'username'|'confirmar contraseña',
+    placeholder:'contraseña'|'correo@test.com'|'username'|'confirmar contraseña' |'lastname',
     onChange:(value:string)=>void;
 
 }

@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import {StyleSheet, Text, View,StatusBar, TouchableOpacity, ToastAndroid} from 'react-native'
-import  {getAuth,createUserWithEmailAndPassword,EmailAuthCredential ,signInWithEmailAndPassword,onAuthStateChanged }  from "firebase/auth";
+
 import { Primary } from '../colors/Colors';
 import { Inputs } from '../components/Inputs';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useForm } from '../hooks/useForm';
 import { firebaseConfig } from '../data/ConfigFirebase';
-import { initializeApp } from "firebase/app";
+//import { initializeApp } from "firebase/app";
 import { authContext, AuthContext } from '../components/AuthContext';
+import auth from '@react-native-firebase/auth';
 
 
 interface Props extends StackScreenProps<any,any>{};
@@ -23,11 +24,10 @@ export const LoginScreen = ({navigation}:Props) => {
 
       if(email.trim()==='' && pass.trim()==='')return ToastAndroid.show('completa todos los campos',ToastAndroid.SHORT);
 
-   
-      const app = initializeApp(firebaseConfig);
+      const resp=  await auth().signInWithEmailAndPassword(email,pass);
+      
     
-      const auth= getAuth(app);
-      const resp= await signInWithEmailAndPassword(auth,email,pass);
+    
       if(resp.user==null)return ToastAndroid.show('Email o contraseña incorrecta',ToastAndroid.SHORT);
         signin(resp.user.uid);
   }

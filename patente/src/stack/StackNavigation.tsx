@@ -7,13 +7,22 @@ import { authContext } from '../components/AuthContext';
 import { RegiterScreen } from '../components/RegisterScreen';
 import { TabsNavigation } from './TabsNavigation';
 import { CreatePostScreen } from '../screen/CreatePostScreen';
-import { initializeApp } from "firebase/app";
-import  {getAuth }  from "firebase/auth";
+//import { initializeApp } from "firebase/app";
+//import  {getAuth }  from "firebase/auth";
 import { firebaseConfig } from '../data/ConfigFirebase';
-const app = initializeApp(firebaseConfig);
+import { ScreenImageByPost } from '../screen/ScreenImageByPost';
+//const app = initializeApp(firebaseConfig);
     
-const auth= getAuth(app);
-const Stack= createStackNavigator();
+//const auth= getAuth(app);
+
+type RootParams={
+  LoginScreen:undefined,
+  RegiterScreen:undefined,
+  TabsNavigation:undefined,
+  CreatePostScreen:undefined,
+  ScreenImageByPost:{idPost:string}
+}
+const Stack= createStackNavigator<RootParams>();
 
 export const StackNavigation = () => {
 
@@ -21,7 +30,7 @@ export const StackNavigation = () => {
 
   useEffect(() => {
    
-  if(auth.currentUser!=null)signin(auth.currentUser.uid);
+  //if(auth.currentUser!=null)signin(auth.currentUser.uid);
 
   }, [])
   
@@ -44,6 +53,7 @@ export const StackNavigation = () => {
         <>
               <Stack.Screen name='TabsNavigation' component={TabsNavigation}/>
               <Stack.Screen name='CreatePostScreen' component={CreatePostScreen}/>
+              <Stack.Screen name='ScreenImageByPost' component={ScreenImageByPost}/>
               
         </>
   

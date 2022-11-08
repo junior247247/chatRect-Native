@@ -1,8 +1,11 @@
 import React, { createContext, useEffect, useReducer } from 'react'
-import { initializeApp } from "firebase/app";
-import  {getAuth }  from "firebase/auth";
+//import { initializeApp } from "firebase/app";
+//import  {getAuth }  from "firebase/auth";
 import { firebaseConfig } from '../data/ConfigFirebase';
+import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 export interface authState{
     state:'not-authenticate'|'authenticated';
     uid:string;
@@ -51,9 +54,9 @@ const authReducer=(state:authState,action:authAction):authState=>{
 
 
 export const authContext = createContext({}as Props);
-const app = initializeApp(firebaseConfig);
+//const app = initializeApp(firebaseConfig);
     
-const auth= getAuth(app);
+//const auth= getAuth(app);
 
 export const AuthContext = ({children}:any) => {
 
@@ -63,9 +66,12 @@ export const AuthContext = ({children}:any) => {
 
 
     useEffect(() => {
-      
+        if(auth().currentUser!=null){
+            dispatch({type:'signin',uid:auth().currentUser!.uid});
+        }
+       
         //console.log(auth.currentUser?.uid)
-        if(auth.currentUser!=null) dispatch({type:'signin',uid:auth.currentUser.uid});
+        //if(auth.currentUser!=null) dispatch({type:'signin',uid:auth.currentUser.uid});
     }, [])
     
     const signin=(uid:string)=>{

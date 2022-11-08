@@ -5,12 +5,13 @@ import { useForm } from '../hooks/useForm'
 import { CreteUser } from '../components/CreateUser'
 import { Inputs } from './Inputs'
 
+
 export const RegiterScreen = () => {
-   const {username,email,pass,passconfirm,onChange} = useForm({username:'',email:'',pass:'',passconfirm:''});
-    const {Isloading,creteUserWithEmailAndPass} =  CreteUser({email:email,pass:pass,name:username});
+   const {username,email,pass,passconfirm,lastname,onChange} = useForm({username:'',email:'',pass:'',passconfirm:'',lastname:''});
+    const {Isloading,creteUserWithEmailAndPass} =  CreteUser({email:email,pass:pass,name:username,lastname:lastname});
     
    const createUser=()=>{
-      if(username.trim()=='' && email.trim()=='' && pass.trim()=='' && passconfirm.trim()=='')return ToastAndroid.show('completa todos los campos',ToastAndroid.LONG);
+      if(username.trim()=='' && email.trim()=='' && pass.trim()=='' && passconfirm.trim()=='' && lastname.trim()=='')return ToastAndroid.show('completa todos los campos',ToastAndroid.LONG);
 
       creteUserWithEmailAndPass();
    }
@@ -26,6 +27,7 @@ export const RegiterScreen = () => {
       <View style={{flex:1,marginTop:90,marginHorizontal:10}}>
 
       <Inputs onChange={(txt)=>{onChange(txt,'username')}} placeholder='username' inputType={'default'} security={false}  icon={'person-circle-outline'} />
+      <Inputs onChange={(txt)=>{onChange(txt,'lastname')}} placeholder='lastname' inputType={'default'} security={false}  icon={'person-circle-outline'} />
       <Inputs onChange={(txt)=>{onChange(txt,'email')}} placeholder='correo@test.com' inputType={'default'} security={false}  icon={'mail-outline'} />
       <Inputs onChange={(txt)=>{onChange(txt,'pass')}} placeholder='contraseña' inputType={'default'} security={true}  icon={'lock-closed-outline'} />
       <Inputs onChange={(txt)=>{onChange(txt,'passconfirm')}} placeholder='confirmar contraseña' inputType={'default'} security={true}  icon={'lock-closed-outline'} />
