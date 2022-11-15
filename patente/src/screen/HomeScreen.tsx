@@ -113,7 +113,7 @@ export const HomeScreen = ({ navigation }: Props) => {
                 <View style={{ flexDirection: 'row', marginHorizontal: 10, alignItems: 'center', borderBottomWidth: 1, paddingBottom: 5, borderBottomColor: '#ECEEEF' }}>
                     <Image source={{uri:images}} style={{ width: 40, height: 40, borderRadius: 100, justifyContent: 'center' }} />
                     <TouchableOpacity onPress={() => { navigation.navigate('CreatePostScreen') }} activeOpacity={0.7} style={{ backgroundColor: '#ECEEEF', width: '90%', height: 40, paddingHorizontal: 10, justifyContent: 'center', borderRadius: 10,marginLeft:5 }}>
-                        <Text>¿ Que estas pensando ?</Text>
+                        <Text style={{color:'black'}}>¿ Que estas pensando ?</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -122,8 +122,8 @@ export const HomeScreen = ({ navigation }: Props) => {
                         <Icon color={Primary} name={'videocam-outline'} size={30} />
                         <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 20 }}>Video</Text>
                     </TouchableOpacity>
-
-                    <TouchableOpacity onPress={()=>{navigation.navigate('CreatePostScreen') }} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: 100 }}>
+                       
+                    <TouchableOpacity onPress={()=>{navigation.navigate('CreatePostScreen') }} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: 100 }}>
                         <Icon color={Primary} name={'images-outline'} size={30} />
                         <Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold' }}>Foto</Text>
                     </TouchableOpacity>

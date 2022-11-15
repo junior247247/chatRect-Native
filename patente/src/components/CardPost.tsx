@@ -22,11 +22,15 @@ export const CardPost = ({ count = 6, url, idPost, idUser, text,timestamp }: Pro
     useEffect(() => {
         console.log(url.length)
         firestore().collection('users').doc(idUser).get().then(resp=>{
+            if(resp!=null){
+
+          
             setimages(resp.get('imgProfile')!.toString())
             setname(resp.get('displayName')!.toString());
             console.log(timestamp)
             var date=new Date(Number(timestamp));
             settimes(date.getDay().toString()+' - '+date.getMonth().toString()+' - '+date.getFullYear().toString());
+        }
         })
 
 

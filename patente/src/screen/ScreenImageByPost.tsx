@@ -20,6 +20,9 @@ export const ScreenImageByPost = ({route}:Prop) => {
       
     
         firestore().collection('Post').doc(idPost).onSnapshot(resp=>{
+          if(resp!=null){
+
+         
 
           let img:string[]=resp.get('img')!.toString().split(',');
              
@@ -27,7 +30,7 @@ export const ScreenImageByPost = ({route}:Prop) => {
          setimages([...img]);
         
 
-
+        }
            
                 
       

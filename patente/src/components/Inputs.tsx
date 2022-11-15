@@ -16,7 +16,7 @@ export const Inputs = ({security=false,inputType,icon,placeholder,onChange}:Prop
   return (
    <View style={{alignItems:'center',marginVertical:20,borderColor:'#ccc',flexDirection:'row',borderWidth:1,borderRadius:10}}>   
     <Icon color={Primary} style={{marginLeft:10,borderLeftColor:'#ccc'}} name={icon} size={20}/>
-    <TextInput onChangeText={onChange} placeholder={placeholder}  secureTextEntry={security} keyboardType={inputType} style={{flex:1}} />
+    <TextInput placeholderTextColor={'black'}  onChangeText={onChange} placeholder={placeholder}  secureTextEntry={security} keyboardType={inputType} style={{flex:1,color:'black'}} />
 
    </View>
   )

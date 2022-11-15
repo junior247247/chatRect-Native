@@ -169,12 +169,18 @@ export const CreatePostScreen = ({ navigation }: Props) => {
             </View>
 
             <TextInput onChangeText={(txt) => setText(txt)} multiline style={{ paddingHorizontal: 5, color: 'black', marginVertical: 20, width: 350, backgroundColor: '#ECEEEF', alignSelf: 'center', borderRadius: 10 }} placeholderTextColor={'black'} placeholder='Escribe algo' />
-            <TouchableOpacity onPress={() => uploadImage()} activeOpacity={0.7} style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 10, backgroundColor: (Isloading)?'#ccc':Primary, height: 50, marginHorizontal: 20, marginTop: 60 }}>
-                <Text style={{ color: 'white', fontWeight: 'bold' }}>Publicar</Text>
-            </TouchableOpacity>
+            
             {
-                (Isloading) &&             <ActivityIndicator  style={{position:'absolute',top:'50%',alignSelf:'center'}} color={Primary} size={70}/>
+                (Isloading) ?                          <ActivityIndicator  style={{position:'absolute',top:'50%',alignSelf:'center'}} color={Primary} size={70}/>
+                    :
+                    <TouchableOpacity onPress={() => uploadImage()} activeOpacity={0.7} style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 10, backgroundColor: (Isloading)?'#ccc':Primary, height: 50, marginHorizontal: 20, marginTop: 60 }}>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Publicar</Text>
+                </TouchableOpacity>
+
             }
+          
+            
+            
 
         </View>
     )

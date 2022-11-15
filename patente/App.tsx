@@ -19,7 +19,7 @@ export const App = () => {
   return (
     <NavigationContainer>
       <AppState>
-        <StatusBar  backgroundColor={'white'} />
+        <StatusBar  barStyle={'dark-content'} backgroundColor={'white'}/>
         <StackNavigation/>
         </AppState>
     </NavigationContainer>

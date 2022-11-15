@@ -18,11 +18,14 @@ export const CardPostText = ({ idUser, timestamp, text }: Props) => {
     useEffect(() => {
      
             firestore().collection('users').doc(idUser.trim()).get().then(resp => {
-          
+          if(resp!=null){
+
+        
             setimages(resp.get('imgProfile')!.toString());
             setName(resp.get('displayName')!.toString());
             var date = new Date(Number(timestamp));
             setTimes(date.getDay().toString() + ' - ' + date.getMonth().toString() + ' - ' + date.getFullYear().toString());
+        }
         })
      
     }, [])

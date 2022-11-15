@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import { useAnimation } from '../hooks/useAnimation';
 import { Primary } from '../colors/Colors';
 import { CardFriends } from '../components/CardFriends';
+
 interface Friends{
     idUser:string,
 }
@@ -44,9 +45,15 @@ export const ScreenAmigos = () => {
   }
   
     useEffect(() => {
+      console.log(state.uid,auth().currentUser?.uid)
       firestore().collection('amigos').where('id','==',state.uid).onSnapshot(res=>{
+        if(res!=null){
+          if(res.size>0){
+
+        
+        
         const arr:any[]=res.docs[0].get('idFriends');
-      //  console.log(arr)
+        console.log(arr)
         arr.map(resp=>{
           firestore().collection('users').doc(resp).onSnapshot(res=>{
             const data:Users={
@@ -55,10 +62,12 @@ export const ScreenAmigos = () => {
               url:res.get('imgProfile')!.toString()
             }
             setUsers([...Users,data]);
+        
 
           })
         })
-
+      }
+      }
       })
       
   }, [])

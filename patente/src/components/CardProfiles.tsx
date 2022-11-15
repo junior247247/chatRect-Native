@@ -22,8 +22,10 @@ export const CardProfiles = ({ img, displayName, idUser }: Props) => {
     useEffect(() => {
         console.log(state.uid)
         firestore().collection('solicitudes').where('Recibido', '==', state.uid).where('isAccep', '==', false).get().then(resp => {
-            if (resp.size > 0) {
-                setSoli({ ...soli, recibio: true });
+            if (resp != null) {
+                if (resp.size > 0) {
+                    setSoli({ ...soli, recibio: true });
+                }
             }
         });
     }, [soli.recibio])
@@ -39,38 +41,60 @@ export const CardProfiles = ({ img, displayName, idUser }: Props) => {
 
     const aceptarSolicitud = () => {
 
-        firestore().collection('amigos').where('id', '==', state.uid).get().then(resp => {
-            if (resp.size > 0) {
-                const amigos: any[] = resp.docs.map(res => {
-                    return res.get('idFriends')?.toString();
-                })
+        firestore().collection('amigos').where('id', '==', idUser).get().then(resp => {
 
-                amigos.push(idUser);
+            if (resp != null) {
+                if (resp.size > 0) {
+                    const amigos: any[] = resp.docs.map(res => {
+                        return res.get('idFriends')?.toString();
+                    })
 
-                firestore().collection('solicitudes').where('Solicitante','==',idUser).where('isAccep', '==', false).where('Recibido','==',state.uid).get().then(res=>{
-                    if(res.size>0){
-                        res.docs.map(resp=>{
-                            const id=resp.id;
-                            firestore().collection('amigos').doc(id).update({ isAccep:true})                 
-                        })
-                    }
-                })
+                    amigos.push(idUser);
+                    firestore().collection('amigos').doc(idUser).update({ idFriends: amigos })
 
-                firestore().collection('amigos').doc(state.uid).update({idFriends: amigos})
-                firestore().collection('amigos').doc(idUser).update({idFriends: amigos})
-            } else {
-                firestore().collection('amigos').doc(state.uid).set({
-                    id: state.uid,
-                    idFriends: idUsers
-                })
+                    firestore().collection('solicitudes').where('Solicitante', '==', idUser).where('isAccep', '==', false).where('Recibido', '==', state.uid).get().then(res => {
+                        if (res != null) {
 
-                firestore().collection('amigos').doc(idUser).set({
-                    id: idUser,
-                    idFriends: idUsers
-                })
 
-                
+                            if (res.size > 0) {
+                                res.docs.map(resp => {
+                                    const id = resp.id;
+                                    firestore().collection('amigos').doc(id).update({ isAccep: true })
+                                })
+                            }
+                        }
+                    })
+
+                    firestore().collection('amigos').where('id', '==', state.uid).get().then(resp => {
+                        if (resp != null) {
+                            const amigosS: any[] = resp.docs.map(res => {
+                                return res.get('idFriends')?.toString();
+                            })
+                            amigosS.push(idUser)
+                            firestore().collection('amigos').doc(state.uid).update({ idFriends: amigosS })
+                        }
+                    })
+
+
+
+                } else {
+                    firestore().collection('amigos').doc(state.uid).set({
+                        id: state.uid,
+                        idFriends: idUsers
+                    })
+
+                    firestore().collection('amigos').doc(idUser).set({
+                        id: idUser,
+                        idFriends: [state.uid]
+                    })
+
+
+                }
+
             }
+
+
+
         })
 
     }

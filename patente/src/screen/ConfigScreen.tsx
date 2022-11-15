@@ -36,20 +36,16 @@ export const ConfigScreen = () => {
 
     const traerAmigos = async () => {
 
-        firestore().collection('amigos').where('id', '==', state.uid).onSnapshot(resp => {
-            if (resp.size > 0) {
-
-            }
-        })
+     
 
         firestore().collection('users').where('id', '!=', state.uid).onSnapshot(user => {
 
-
+                if(user==null)return;
 
             const arr: string[] = user.docs.map(r => {
                 return r.id;
             })
-            // console.log(arr);
+             console.log(arr);
 
 
 
@@ -108,7 +104,7 @@ export const ConfigScreen = () => {
                     <Text style={{ marginLeft: 5, color: Primary, fontSize: 24, fontWeight: 'bold', fontFamily: 'arial' }}>Talk Safe</Text>
 
                     <View style={{ flexDirection: 'row', height: 35, flex: 1, borderRadius: 90, paddingHorizontal: 5, marginHorizontal: 5, backgroundColor: '#ECEEEF', marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
-                        <TextInput placeholder='Buscar' style={{ flex: 1, paddingTop: 10, justifyContent: 'center', alignItems: 'center' }} />
+                        <TextInput placeholderTextColor={'black'} placeholder='Buscar' style={{ color:'black',flex: 1, paddingTop: 10, justifyContent: 'center', alignItems: 'center' }} />
                         <Icon color={Primary} style={{ textAlign: 'center', marginRight: 5, borderLeftColor: '#ccc' }} name={'search-outline'} size={20} />
                     </View>
                     <TouchableOpacity style={{ width: 15, alignItems: 'center', marginRight: 8 }} onPress={() => { showClose() }}>
