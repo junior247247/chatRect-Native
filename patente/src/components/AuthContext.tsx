@@ -7,11 +7,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export interface authState{
-    state:'not-authenticate'|'authenticated';
+    state:'not-authenticate'|'authenticated'|'cheking';
     uid:string;
 }
 const initState:authState={
-    state:'not-authenticate',
+    state:'cheking',
     uid:''
 }
 
@@ -41,7 +41,7 @@ const authReducer=(state:authState,action:authAction):authState=>{
             return{
                 ...state,
                 uid:'',
-                state:'authenticated'
+                state:'not-authenticate'
             }
     
         default:
@@ -66,6 +66,8 @@ export const AuthContext = ({children}:any) => {
 
 
     useEffect(() => {
+        console.log(auth().currentUser?.uid,'sssss');
+        
         if(auth().currentUser!=null){
             dispatch({type:'signin',uid:auth().currentUser!.uid});
         }

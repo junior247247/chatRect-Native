@@ -11,16 +11,18 @@ import { CreatePostScreen } from '../screen/CreatePostScreen';
 //import  {getAuth }  from "firebase/auth";
 import { firebaseConfig } from '../data/ConfigFirebase';
 import { ScreenImageByPost } from '../screen/ScreenImageByPost';
+import { MessageScreen } from '../screen/MessageScreen';
 //const app = initializeApp(firebaseConfig);
     
 //const auth= getAuth(app);
 
-type RootParams={
+export type RootParams={
   LoginScreen:undefined,
   RegiterScreen:undefined,
   TabsNavigation:undefined,
   CreatePostScreen:undefined,
-  ScreenImageByPost:{idPost:string}
+  ScreenImageByPost:{idPost:string},
+  MessageScreen:{idUser:string}
 }
 const Stack= createStackNavigator<RootParams>();
 
@@ -40,7 +42,7 @@ export const StackNavigation = () => {
     <Stack.Navigator initialRouteName='LoginScreen' screenOptions={{cardStyle:{backgroundColor:'white'},headerShown:false}}  >
 
       {
-        (state.state=='not-authenticate') ? 
+        (state.state=='not-authenticate' || state.state=='cheking') ? 
         <>
          <Stack.Screen name='LoginScreen' component={LoginScreen}/>
          <Stack.Screen name='RegiterScreen' component={RegiterScreen}/>
@@ -54,6 +56,7 @@ export const StackNavigation = () => {
               <Stack.Screen name='TabsNavigation' component={TabsNavigation}/>
               <Stack.Screen name='CreatePostScreen' component={CreatePostScreen}/>
               <Stack.Screen name='ScreenImageByPost' component={ScreenImageByPost}/>
+              <Stack.Screen name='MessageScreen' component={MessageScreen} />
               
         </>
   

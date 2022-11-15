@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
-import { View, Text, TouchableOpacity, Image, ToastAndroid } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ToastAndroid,ActivityIndicator } from 'react-native'
 
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -24,11 +24,7 @@ interface File {
     uri: string | undefined,
     type: string | undefined
 }
-interface Post {
-    idUser: string | undefined,
-    img: string[] | undefined[],
-    text: string | undefined
-}
+
 
 interface Props extends StackScreenProps<RootParams, 'CreatePostScreen'> { };
 
@@ -37,10 +33,10 @@ export const CreatePostScreen = ({ navigation }: Props) => {
     const [fileImages, setfileImages] = useState<File[]>([]);
     const [text, setText] = useState('');
     const { state: contexState } = useContext(authContext);
-    const [Post, setPost] = useState<Post>()
-
-
-    const [images, setimages] = useState<string[]>([]);
+    
+        
+       const [Isloading, setIsloading] = useState(false); 
+   
     const url = useRef<string[]>([]);
 
 
@@ -75,7 +71,7 @@ export const CreatePostScreen = ({ navigation }: Props) => {
 
     const save = async () => {
         if (text || fileImages.length > 0) {
-
+            setIsloading(true);
 
             if (fileImages.length > 0) {
 
@@ -92,15 +88,16 @@ export const CreatePostScreen = ({ navigation }: Props) => {
             }
 
 
-            firestore().collection('Post').add({
+         const resp=  await  firestore().collection('Post').add({
                 img: url.current,
                 text: text,
                 userId: contexState.uid,
                 timestamp: new Date().getTime()
-            }).then(resp => {
-                ToastAndroid.show('Post creado', ToastAndroid.SHORT);
+            });
+            setIsloading(false);
+        
                 navigation.pop();
-            })
+            
 
 
         } else {
@@ -138,7 +135,7 @@ export const CreatePostScreen = ({ navigation }: Props) => {
     }
 
     return (
-        <View>
+        <View style={{flex:1}}>
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
                 <View style={{ flexDirection: 'row', margin: 10 }}>
                     <Text style={{ color: Primary, fontSize: 24, fontWeight: 'bold', fontFamily: 'arial' }}>Talk Safe</Text>
@@ -172,9 +169,13 @@ export const CreatePostScreen = ({ navigation }: Props) => {
             </View>
 
             <TextInput onChangeText={(txt) => setText(txt)} multiline style={{ paddingHorizontal: 5, color: 'black', marginVertical: 20, width: 350, backgroundColor: '#ECEEEF', alignSelf: 'center', borderRadius: 10 }} placeholderTextColor={'black'} placeholder='Escribe algo' />
-            <TouchableOpacity onPress={() => uploadImage()} activeOpacity={0.7} style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 10, backgroundColor: Primary, height: 50, marginHorizontal: 20, marginTop: 60 }}>
+            <TouchableOpacity onPress={() => uploadImage()} activeOpacity={0.7} style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 10, backgroundColor: (Isloading)?'#ccc':Primary, height: 50, marginHorizontal: 20, marginTop: 60 }}>
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>Publicar</Text>
             </TouchableOpacity>
+            {
+                (Isloading) &&             <ActivityIndicator  style={{position:'absolute',top:'50%',alignSelf:'center'}} color={Primary} size={70}/>
+            }
+
         </View>
     )
 }

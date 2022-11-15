@@ -23,7 +23,7 @@ export const CardPost = ({ count = 6, url, idPost, idUser, text,timestamp }: Pro
         console.log(url.length)
         firestore().collection('users').doc(idUser).get().then(resp=>{
             setimages(resp.get('imgProfile')!.toString())
-            setname(resp.get('name')!.toString());
+            setname(resp.get('displayName')!.toString());
             console.log(timestamp)
             var date=new Date(Number(timestamp));
             settimes(date.getDay().toString()+' - '+date.getMonth().toString()+' - '+date.getFullYear().toString());
@@ -185,6 +185,7 @@ export const CardPost = ({ count = 6, url, idPost, idUser, text,timestamp }: Pro
       
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 10, marginVertical: 5 }}>
+                <Text>0 Me gustas</Text>
                 <Text>0 comentarios</Text>
                 <Text>0 compartidas</Text>
             </View>

@@ -26,10 +26,11 @@ export const CreteUser = ({email,pass,name,lastname}:Prosp) => {
       if(resp.user==null)return ToastAndroid.show('error',ToastAndroid.SHORT);
         firestore().collection('users').doc(resp.user.uid).set({
           name:name,
-          imgProfile:imageProfile,
+          imgProfile:imageProfile.current,
           id:resp.user.uid,
           lastname:lastname,
           displayName:name+' '+lastname,
+          timestamp:new Date().getTime()
         })
         signin(resp.user.uid);
         setIsloading(false);

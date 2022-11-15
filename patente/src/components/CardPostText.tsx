@@ -20,7 +20,7 @@ export const CardPostText = ({ idUser, timestamp, text }: Props) => {
             firestore().collection('users').doc(idUser.trim()).get().then(resp => {
           
             setimages(resp.get('imgProfile')!.toString());
-            setName(resp.get('name')!.toString());
+            setName(resp.get('displayName')!.toString());
             var date = new Date(Number(timestamp));
             setTimes(date.getDay().toString() + ' - ' + date.getMonth().toString() + ' - ' + date.getFullYear().toString());
         })
@@ -52,6 +52,7 @@ export const CardPostText = ({ idUser, timestamp, text }: Props) => {
             </TouchableOpacity>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 10, marginVertical: 5 }}>
+                <Text>0 Me gustas</Text>
                 <Text>0 comentarios</Text>
                 <Text>0 compartidas</Text>
             </View>

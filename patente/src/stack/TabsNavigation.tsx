@@ -7,6 +7,7 @@ import { HomeScreen } from '../screen/HomeScreen';
 import { ProfileScreen } from '../screen/ProfileScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Primary } from '../colors/Colors'
+import { ScreenAmigos } from '../screen/ScreenAmigos';
 
 const Tab=createBottomTabNavigator();
 
@@ -17,6 +18,7 @@ export const TabsNavigation = () => {
         <Tab.Screen component={ChatsScreen}name={'Chats'} options={{tabBarIcon:({color,size})=>(<Icon color={color} name='chatbubbles-outline' size={size}/>)}} />
         <Tab.Screen component={ProfileScreen} name={'Profile'} options={{tabBarIcon:({color,size})=>(<Icon color={color} name='person-outline' size={size}/>)}}/>
         <Tab.Screen component={ConfigScreen} name={'Buscar'} options={{tabBarIcon:({color,size})=>(<Icon color={color} name='search-outline' size={size}/>)}}/>
+        <Tab.Screen component={ScreenAmigos} name={'Amigos'} options={{tabBarIcon:({color,size})=>(<Icon color={color} name='people-outline' size={size}/>)}}/>
     </Tab.Navigator>
   )
 }
