@@ -135,6 +135,7 @@ export const HomeScreen = ({ navigation }: Props) => {
             <FlatList
                 style={{ backgroundColor: '#ECEEEF' }}
                 data={Post}
+                keyExtractor={(item)=>item.idPost}
                 renderItem={({ item, index }) => (
 
                     (item.text != '' && item.img.length == 0) ?

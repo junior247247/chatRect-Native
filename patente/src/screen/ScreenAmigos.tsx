@@ -45,7 +45,7 @@ export const ScreenAmigos = () => {
   }
   
     useEffect(() => {
-      console.log(state.uid,auth().currentUser?.uid)
+ 
       firestore().collection('amigos').where('id','==',state.uid).onSnapshot(res=>{
         if(res!=null){
           if(res.size>0){

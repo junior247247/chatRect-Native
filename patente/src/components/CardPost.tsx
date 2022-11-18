@@ -47,7 +47,7 @@ export const CardPost = ({ count = 6, url, idPost, idUser, text,timestamp }: Pro
                     <Image style={{borderRadius:100,borderWidth:1,borderColor:Primary,height:40,width:40}} source={{uri:images!}} />
                 
                     <View style={{ marginLeft: 5, justifyContent: 'center', flex: 1 }}>
-                        <Text style={{ color: Primary, fontSize: 14 }}>{name}</Text>
+                        <Text style={{ color: Primary, fontSize: 14 }}>{name.toUpperCase()}</Text>
                         <Text style={{ fontSize: 10 ,fontWeight:'bold'}}>{times}</Text>
                     </View>
                     <TouchableOpacity style={{ justifyContent: 'center', marginRight: 5 }}>
@@ -189,9 +189,9 @@ export const CardPost = ({ count = 6, url, idPost, idUser, text,timestamp }: Pro
       
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 10, marginVertical: 5 }}>
-                <Text>0 Me gustas</Text>
-                <Text>0 comentarios</Text>
-                <Text>0 compartidas</Text>
+                <Text style={{color:'black'}}>0 Me gustas</Text>
+                <Text style={{color:'black'}}>0 comentarios</Text>
+                <Text style={{color:'black'}}>0 compartidas</Text>
             </View>
             <View style={{ flexDirection: 'row',borderTopWidth:0.5,borderTopColor:'#ccc',paddingBottom:5,paddingTop:5, justifyContent: 'space-around', alignItems: 'center', margin: 10 }}>
                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>

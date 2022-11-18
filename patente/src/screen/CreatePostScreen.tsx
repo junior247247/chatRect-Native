@@ -112,6 +112,7 @@ export const CreatePostScreen = ({ navigation }: Props) => {
         launchImageLibrary({ mediaType: 'video', includeBase64: true, selectionLimit: 1 }, resp => {
             if (resp.didCancel) return;
             if (!resp.assets![0].base64) return;
+        
         })
     }
 
