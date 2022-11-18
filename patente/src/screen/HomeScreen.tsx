@@ -28,7 +28,10 @@ export const HomeScreen = ({ navigation }: Props) => {
 
     useEffect(() => {
         firestore().collection('users').doc(state.uid).get().then(resp=>{
-            setImages(resp.get('imgProfile')!.toString())
+            if(resp!=null){
+                setImages(resp.get('imgProfile')!.toString())
+            }
+           
         })
     }, [])
     
@@ -66,7 +69,7 @@ export const HomeScreen = ({ navigation }: Props) => {
 
 
         firestore().collection('Post').orderBy('timestamp', 'desc').onSnapshot(resp => {
-                console.log(resp)
+                
                 if(resp!=null){
 
               

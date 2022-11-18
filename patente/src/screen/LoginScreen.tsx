@@ -39,7 +39,7 @@ export const LoginScreen = ({ navigation }: Props) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar backgroundColor={Primary} />
+      <StatusBar backgroundColor={Primary} barStyle={'light-content'} />
       <View style={{ width: '100%', height: 50, justifyContent: 'center', backgroundColor: Primary }}>
         <Text style={{ fontWeight: 'bold', color: 'white', fontSize: 20, marginVertical: 10, marginHorizontal: 20 }}>Talk Safe</Text>
       </View>

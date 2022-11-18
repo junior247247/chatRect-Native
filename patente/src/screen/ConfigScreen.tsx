@@ -45,11 +45,14 @@ export const ConfigScreen = () => {
             const arr: string[] = user.docs.map(r => {
                 return r.id;
             })
-             console.log(arr);
+         
 
 
 
             firestore().collection('amigos').where('id', '==', state.uid).where('idFriends', 'array-contains-any', arr).onSnapshot(snap => {
+                if(snap!=null){
+
+                
 
                 if (snap.size == 0) {
                     const data: user[] = user.docs.map(user => {
@@ -74,6 +77,9 @@ export const ConfigScreen = () => {
                         setFriends(resp => resp.filter(id => id.idUser !== r));
                     })
                 }
+
+
+            }
             });
 
 

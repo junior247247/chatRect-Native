@@ -33,6 +33,7 @@ export const ProfileScreen = () => {
   const [Posts, setPost] = useState<Post[]>([]);
   const [Name, setName] = useState('');
   const [Count, setCount] = useState('');
+  const [Images, setImages] = useState('');
  
   const { current } = useRef('https://firebasestorage.googleapis.com/v0/b/socialmediagamer-bb7d4.appspot.com/o/312278152_5712872142098721_8528669024002143528_n.jpg?alt=media&token=6836c1f0-33a7-4e2b-b948-46231eb2f69e');
   const showClose = () => {
@@ -68,6 +69,8 @@ export const ProfileScreen = () => {
 
       if(resp!=null){
         setName(resp.get('displayName')!.toString());
+        setImages(resp.get('imgProfile')!.toString());
+
       }
     });
     
@@ -135,18 +138,18 @@ export const ProfileScreen = () => {
       <View style={{ height: 200 ,backgroundColor:'white'}}>
 
 
-        <Image source={{uri:current}} style={{ height: 170, backgroundColor: '#ccc' }}/>
+        <Image source={{uri:Images}} style={{ height: 170, backgroundColor: '#ccc' }}/>
 
         
 
-        <Image source={{ uri: current }} style={{ borderWidth: 2, borderColor: 'white', marginLeft: 10, width: 80, height: 80, borderRadius: 100, backgroundColor: 'red', position: 'absolute', bottom: -10 }} />
+        <Image source={{ uri: Images }} style={{ borderWidth: 2, borderColor: 'white', marginLeft: 10, width: 80, height: 80, borderRadius: 100, backgroundColor: 'red', position: 'absolute', bottom: -10 }} />
 
       <TouchableOpacity style={{backgroundColor:Primary,width:100,marginRight:10,marginTop:10,height:30,alignSelf:'flex-end',borderRadius:10,justifyContent:'center',alignItems:'center'}}>
             <Text>Editar</Text>
       </TouchableOpacity>
 
         <View style={{ marginTop: 5, paddingHorizontal: 15,paddingBottom:15,backgroundColor:'white'}}>
-          <Text style={{ color: 'black', fontWeight: 'bold' }}>{Name.toUpperCase()}</Text>
+          <Text style={{ color: 'black', fontWeight: 'bold' ,fontFamily:'Arial'}}>{Name.toUpperCase()}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
             <View style={{ flexDirection: 'row' }}>
               <Text style={{ color: 'black', fontWeight: 'bold' }}>{Count}</Text>
