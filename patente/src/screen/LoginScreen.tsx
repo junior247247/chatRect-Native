@@ -31,9 +31,14 @@ export const LoginScreen = ({ navigation }: Props) => {
 
 
 
-    if (resp.user == null) return  setIsLoading(false); ToastAndroid.show('Email o contraseña incorrecta', ToastAndroid.SHORT);
-    signin(resp.user.uid);
-    setIsLoading(false);
+    if (resp.user == null){
+         setIsLoading(false); 
+         ToastAndroid.show('Email o contraseña incorrecta', ToastAndroid.SHORT);
+    }else{
+      signin(resp.user.uid);
+      setIsLoading(false);
+    }
+   
   }
 
 

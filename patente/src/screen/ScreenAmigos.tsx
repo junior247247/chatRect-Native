@@ -56,6 +56,9 @@ export const ScreenAmigos = () => {
         console.log(arr)
         arr.map(resp=>{
           firestore().collection('users').doc(resp).onSnapshot(res=>{
+            if(res!=null){
+
+           
             const data:Users={
               displayName:res.get('displayName')!.toString(),
               idUser:res.id,
@@ -63,7 +66,7 @@ export const ScreenAmigos = () => {
             }
             setUsers([...Users,data]);
         
-
+          }
           })
         })
       }

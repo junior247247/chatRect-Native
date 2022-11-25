@@ -115,7 +115,7 @@ export const HomeScreen = ({ navigation }: Props) => {
             <View style={{ marginBottom: 10 }}>
                 <View style={{ flexDirection: 'row', marginHorizontal: 10, alignItems: 'center', borderBottomWidth: 1, paddingBottom: 5, borderBottomColor: '#ECEEEF' }}>
                     <Image source={{uri:images}} style={{ width: 40, height: 40, borderRadius: 100, justifyContent: 'center' }} />
-                    <TouchableOpacity onPress={() => { navigation.navigate('CreatePostScreen') }} activeOpacity={0.7} style={{ backgroundColor: '#ECEEEF', width: '90%', height: 40, paddingHorizontal: 10, justifyContent: 'center', borderRadius: 10,marginLeft:5 }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('CreatePostScreen') }} activeOpacity={0.7} style={{ backgroundColor: '#ECEEEF', width: '89%', height: 40, paddingHorizontal: 10, justifyContent: 'center', borderRadius: 10,marginLeft:5 }}>
                         <Text style={{color:'black'}}>¿ Que estas pensando ?</Text>
                     </TouchableOpacity>
 
